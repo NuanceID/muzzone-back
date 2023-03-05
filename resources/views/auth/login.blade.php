@@ -7,16 +7,23 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="m-sm-4">
-                                <form>
+                                <form method="POST" action="{{route('login')}}">
+                                    @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
                                         <input class="form-control form-control-lg" type="email" name="email"
                                                placeholder="Почта"/>
+                                        @error('email')
+                                            <div class="badge bg-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Пароль</label>
                                         <input class="form-control form-control-lg" type="password" name="password"
                                                placeholder="Пароль"/>
+                                        @error('password')
+                                        <div class="badge bg-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="text-center mt-3">
                                         <button type="submit" class="btn btn-lg btn-primary w-100">Вход</button>

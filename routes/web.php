@@ -6,9 +6,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware('auth')->name('manager.')->group(function () {
+Route::middleware('auth')->prefix('manager')->name('manager.')->group(function () {
     Route::get('/', function () {
         return view('manager.index');
+    });
+
+    Route::name('tracks.')->prefix('tracks')->group(function () {
+        Route::get('list', );
     });
 });
 
