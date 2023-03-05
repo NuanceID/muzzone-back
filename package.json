@@ -12,6 +12,14 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.2.3"
+        "@babel/polyfill": "7.12.1",
+        "@popperjs/core": "2.11.5",
+        "bootstrap": "^5.2.3",
+        "chart.js": "2.9.4",
+        "feather-icons": "4.29.0",
+        "flatpickr": "4.6.13",
+        "jsvectormap": "1.5.0",
+        "sass": "^1.58.3",
+        "simplebar": "5.3.8"
     }
 }
