@@ -5,8 +5,31 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property string $name
+ */
 class Playlist extends BaseModel
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('cover')
+            ->useDisk('playlist');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tracks(): BelongsToMany
+    {
+        return $this->belongsToMany(Track::class);
+    }
 }

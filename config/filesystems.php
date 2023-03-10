@@ -33,7 +33,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
-            'throw' => false,
+            'throw' => false
         ],
 
         'public' => [
@@ -41,7 +41,7 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-            'throw' => false,
+            'throw' => false
         ],
 
         's3' => [
@@ -53,9 +53,50 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
+            'throw' => false
         ],
 
+        'album' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/album'),
+            'url' => env('APP_URL').'/storage/album',
+            'visibility' => 'public'
+        ],
+
+        'artist' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/artist'),
+            'url' => env('APP_URL').'/storage/artist',
+            'visibility' => 'public'
+        ],
+
+        'category' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/category'),
+            'url' => env('APP_URL').'/storage/category',
+            'visibility' => 'public'
+        ],
+
+        'genre' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/genre'),
+            'url' => env('APP_URL').'/storage/genre',
+            'visibility' => 'public'
+        ],
+
+        'track' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/track'),
+            'url' => env('APP_URL').'/storage/track',
+            'visibility' => 'public'
+        ],
+
+        'playlist' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/playlist'),
+            'url' => env('APP_URL').'/storage/playlist',
+            'visibility' => 'public'
+        ]
     ],
 
     /*

@@ -7,11 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="{{asset('icon-48x48.png')}}" />
-
     <title>{{config('app.name')}}</title>
-
-    @vite('resources/css/app.css')
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -23,6 +21,5 @@
             @include('partials.footer')
         </div>
 </div>
-@vite('resources/js/app.js')
 </body>
 </html>
