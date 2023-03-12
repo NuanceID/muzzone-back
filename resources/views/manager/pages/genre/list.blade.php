@@ -22,10 +22,10 @@
                 @foreach($genres as $genre)
                     <tr>
                         <td>{{$genre->id}}</td>
-                                                <td>
-                                                    <x-single-image :url="$genre->getSingleImageUrl()"/>
-                                                </td>
-                                                <td>{{$genre->name}}</td>
+                        <td>
+                            <x-single-image :url="$genre->getSingleImageUrl()"/>
+                        </td>
+                        <td>{{$genre->name}}</td>
                         <td>
                             @if($genre->subGenre)
                                 <a href="{{route('manager.genres.edit', ['genre' => $genre->subGenre->id])}}">
