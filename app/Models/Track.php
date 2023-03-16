@@ -15,12 +15,12 @@ use Illuminate\Support\Collection;
  * @property string $bitrate
  * @property-read Album $album
  * @property-read Collection $artists
+ * @property-read Collection $genres
+ * @property-read Collection $playlists
  */
 class Track extends BaseModel
 {
     use HasFactory;
-
-    protected $guarded = ['id'];
 
     public function registerMediaCollections(): void
     {
@@ -31,10 +31,11 @@ class Track extends BaseModel
         $this
             ->addMediaCollection('file')
             ->useDisk('track');
+    }
 
-        info('register track collections', [
-            $this->getMediaRepository()->all()
-        ]);
+    public function getSingleMediaUrl(): string
+    {
+        return $this->getFirstMedia('file')->getUrl();
     }
 
     public function artists(): BelongsToMany
@@ -55,5 +56,10 @@ class Track extends BaseModel
     public function album(): BelongsTo
     {
         return $this->belongsTo(Album::class);
+    }
+
+    public function playlists(): BelongsToMany
+    {
+        return $this->belongsToMany(Playlist::class);
     }
 }

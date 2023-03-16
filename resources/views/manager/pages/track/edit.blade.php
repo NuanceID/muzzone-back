@@ -35,46 +35,29 @@
                             <input class="form-select" type="file" name="file">
                         </div>
 
-                        <div class="form-group my-2">
-                            <label>Исполнители</label>
-                            <select class="form-select" name="artists_ids[]" multiple>
-                                @foreach($artists as $artist)
+                        <x-select-search entity="artist"
+                                         name="artists_ids[]"
+                                         :multiple="true"
+                                         label="Исполнители"
+                                         :options="$track->artists"/>
 
-                                    <option
-                                        @selected(in_array($artist->id, $track->artists()->pluck('artists.id')->toArray())) value="{{$artist->id}}">{{$artist->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="genre"
+                                         name="genres_ids[]"
+                                         :multiple="true"
+                                         label="Жанры"
+                                         :options="$track->genres"/>
 
-                        <div class="form-group my-2">
-                            <label>Жанры</label>
-                            <select class="form-select" name="genres_ids[]" multiple>
-                                @foreach($genres as $genre)
-                                    <option
-                                        @selected(in_array($genre->id, $track->genres()->pluck('genres.id')->toArray())) value="{{$genre->id}}">{{$genre->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="category"
+                                         name="categories_ids[]"
+                                         :multiple="true"
+                                         label="Категории"
+                                         :options="$track->categories"/>
 
-                        <div class="form-group my-2">
-                            <label>Категории</label>
-                            <select class="form-select" name="categories_ids[]" multiple>
-                                @foreach($categories as $category)
-                                    <option
-                                        @selected(in_array($category->id, $track->categories()->pluck('categories.id')->toArray())) value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group my-2">
-                            <label>Альбом</label>
-                            <select class="form-select" name="album_id">
-                                @foreach($albums as $album)
-                                    <option
-                                        @selected($track->album()->is($album)) value="{{$album->id}}">{{$album->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="album"
+                                         name="album_id"
+                                         :multiple="false"
+                                         label="Альбом"
+                                         :options="$track->album"/>
 
                         <div class="form-group my-2">
                             <button type="submit" class="btn btn-primary">Обновить</button>

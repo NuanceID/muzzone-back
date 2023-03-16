@@ -457,11 +457,6 @@
     "immutable" "^4.0.0"
     "source-map-js" ">=0.6.2 <2.0.0"
 
-"select2@^4.1.0-rc.0":
-  "integrity" "sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A=="
-  "resolved" "https://registry.npmjs.org/select2/-/select2-4.1.0-rc.0.tgz"
-  "version" "4.1.0-rc.0"
-
 "simplebar@5.3.8":
   "integrity" "sha512-LOHjyOcihx++zFN+vuktoZBGpCarFCtHIVDWXOf2VELbGDknq3Hw/sddafRp1aCg123VNkHWOFHUDHYEXAtufQ=="
   "resolved" "https://registry.npmjs.org/simplebar/-/simplebar-5.3.8.tgz"

@@ -21,7 +21,7 @@ final class ArtistService
     {
         return $this
             ->model
-            ->filter()
+            ->filter(request()->query())
             ->withCount('tracks')
             ->paginate();
     }

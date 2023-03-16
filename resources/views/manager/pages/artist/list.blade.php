@@ -7,7 +7,7 @@
                 <a href="{{route('manager.artists.create')}}" class="btn btn-success">Добавить исполнителя</a>
             </div>
             @if(session('message'))
-                <div class="alert alert-info">{{session('message')}}</div>
+                <div class="alert alert-info my-2">{{session('message')}}</div>
             @endif
             <table class="table">
                 <th>#</th>

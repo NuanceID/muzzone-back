@@ -43,8 +43,7 @@ class AlbumController extends Controller
     public function edit(Album $album)
     {
         return view('manager.pages.album.edit', [
-            'album' => $album,
-            'artists' => Artist::get(['id', 'name'])
+            'album' => tap($album)->with('artist:id,name'),
         ]);
     }
 

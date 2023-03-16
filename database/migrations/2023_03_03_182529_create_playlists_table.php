@@ -14,6 +14,7 @@ return new class extends Migration {
                 ->constrained();
 
             $table->string('name');
+            $table->string('description');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -22,7 +22,7 @@ final class PlaylistService
     {
         return $this
             ->model
-            ->filter()
+            ->filter(request()->query())
             ->withCount('tracks')
             ->paginate();
     }
@@ -33,10 +33,12 @@ final class PlaylistService
      */
     public function store(AddPlaylistRequest $request): Playlist
     {
-        $playlist = $this->model->create($request->only([
-            'name',
-            'description'
-        ]));
+        $playlist = $this->model->create(
+            $request->only([
+                'name',
+                'description'
+            ])
+        );
 
         if ($request->has('cover')) {
             $playlist
@@ -44,7 +46,9 @@ final class PlaylistService
                 ->toMediaCollection('cover');
         }
 
-        $playlist->tracks()->sync($request->get('tracks_ids'));
+        $playlist
+            ->tracks()
+            ->sync($request->get('tracks_ids'));
 
         return $playlist;
     }
@@ -53,7 +57,7 @@ final class PlaylistService
      * @throws FileIsTooBig
      * @throws FileDoesNotExist
      */
-    public function update(UpdatePlaylistRequest $request, Playlist $playlist): Category
+    public function update(UpdatePlaylistRequest $request, Playlist $playlist): Playlist
     {
         $playlist = tap($playlist)->update($request->validated());
 
@@ -63,6 +67,10 @@ final class PlaylistService
                 ->addMediaFromRequest('cover')
                 ->toMediaCollection('cover');
         }
+
+        $playlist
+            ->tracks()
+            ->sync($request->get('tracks_ids'));
 
         return $playlist;
     }

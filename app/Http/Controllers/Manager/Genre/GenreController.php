@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Genre\AddGenreRequest;
 use App\Http\Requests\Genre\UpdateGenreRequest;
 use App\Models\Genre;
-use App\Models\Track;
+use App\Models\Playlist;
 use App\Services\Genre\GenreService;
 
 class GenreController extends Controller

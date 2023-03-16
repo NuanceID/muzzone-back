@@ -6,6 +6,7 @@ namespace App\Services\Track;
 
 use App\Http\Requests\AddTrackRequest;
 use App\Http\Requests\Track\UpdateTrackRequest;
+use App\Models\Playlist;
 use App\Models\Track;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -13,7 +14,13 @@ final class TrackService
 {
     public function list(): LengthAwarePaginator
     {
-        return Track::filter()->paginate();
+        return Track::filter(request()->query())
+            ->with([
+                'artists',
+                'genres',
+                'album'
+            ])
+            ->paginate();
     }
 
     public function store(AddTrackRequest $request): Track
@@ -40,10 +47,10 @@ final class TrackService
             ->sync($request->get('categories_ids'));
 
         $track->addMediaFromRequest('cover')
-            ->toMediaCollection('track');
+            ->toMediaCollection('cover');
 
         $track->addMediaFromRequest('file')
-            ->toMediaCollection('track');
+            ->toMediaCollection('file');
 
         return $track;
     }
@@ -75,20 +82,20 @@ final class TrackService
             $track
                 ->clearMediaCollection('cover')
                 ->addMediaFromRequest('cover')
-                ->toMediaCollection('track');
+                ->toMediaCollection('cover');
         }
 
         if ($request->has('file')) {
             $track
                 ->clearMediaCollection('file')
                 ->addMediaFromRequest('file')
-                ->toMediaCollection('track');
+                ->toMediaCollection('file');
         }
 
         return $track;
     }
 
-    public function delete(Track $track, bool $force = false): void
+    public function delete(Playlist $track, bool $force = false): void
     {
         if ($force) {
             $track->forceDelete();

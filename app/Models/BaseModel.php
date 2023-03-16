@@ -19,8 +19,11 @@ class BaseModel extends Model implements HasMedia
     use Filterable;
     use InteractsWithMedia;
 
+    protected $guarded = ['id'];
+
     public function getSingleImageUrl(): ?string
     {
-        return $this->getFirstMedia('cover')?->getUrl();
+        return $this
+            ->getFirstMedia('cover')?->getUrl();
     }
 }

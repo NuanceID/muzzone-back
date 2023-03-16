@@ -7,8 +7,12 @@ use Illuminate\Http\JsonResponse;
 
 class DictionaryController extends Controller
 {
-    public function search($dictionary, string $search): JsonResponse
+    public function search($dictionary, ?string $search = null): JsonResponse
     {
+        if (is_null($search)) {
+            return response()->json();
+        }
+
         $dictionary = app("App\\Models\\$dictionary");
 
         $data = $dictionary::query()
