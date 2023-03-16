@@ -11,6 +11,8 @@
                 <th>Картинка</th>
                 <th>Название</th>
                 <th>Битрейт</th>
+                <th>Альбом</th>
+                <th>Прослушать</th>
                 <th>Дата добавления</th>
                 <th>Дата обновления</th>
                 <th>Действия</th>
@@ -22,6 +24,14 @@
                         </td>
                         <td>{{$track->name}}</td>
                         <td>{{$track->bitrate}}</td>
+                        <td>
+                            <a href="{{route('manager.albums.edit', ['album' => $track->album->id])}}">
+                                {{$track->album->name}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{$track->getSingleMediaUrl()}}">Прослушать</a>
+                        </td>
                         <td>{{$track->created_at}}</td>
                         <td>{{$track->updated_at}}</td>
                         <td>

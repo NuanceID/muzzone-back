@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Artist extends BaseModel
 {
     use HasFactory;
-    protected $guarded = ['id'];
 
     public function registerMediaCollections(): void
     {

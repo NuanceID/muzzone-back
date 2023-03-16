@@ -14,7 +14,7 @@
                 <th>Обложка</th>
                 <th>Имя</th>
                 <th>Исполнитель</th>
-                <th>Количество трэков</th>
+                <th>Количество треков</th>
                 <th>Дата создания</th>
                 <th>Дата обновления</th>
                 <th>Действия</th>
@@ -22,10 +22,10 @@
                 @foreach($albums as $album)
                     <tr>
                         <td>{{$album->id}}</td>
-                                                <td>
-                                                    <x-single-image :url="$album->getSingleImageUrl()"/>
-                                                </td>
-                                                <td>{{$album->name}}</td>
+                        <td>
+                            <x-single-image :url="$album->getSingleImageUrl()"/>
+                        </td>
+                        <td>{{$album->name}}</td>
                         <td>
                             <a href="{{route('manager.artists.edit', ['artist' => $album->artist->id])}}">
                                 {{$album->artist->name}}

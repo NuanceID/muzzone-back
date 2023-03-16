@@ -25,14 +25,10 @@
                                     <input type="file" name="cover" class="form-control">
                                 </div>
 
-                                <div class="form-group my-2">
-                                    <label>Треки</label>
-                                    <select name="tracks_ids[]" class="form-control" multiple>
-                                        @foreach($tracks as $track)
-                                            <option value="{{$track->id}}">{{$track->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <x-select-search entity="track"
+                                                 name="tracks_ids[]"
+                                                 :multiple="true"
+                                                 label="Треки"/>
 
                                 <div class="form-group my-2">
                                     <button type="submit" class="btn btn-primary">Добавить</button>

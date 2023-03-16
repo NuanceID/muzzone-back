@@ -21,10 +21,10 @@
                 @foreach($categories as $category)
                     <tr>
                         <td>{{$category->id}}</td>
-                                                <td>
-                                                    <x-single-image :url="$category->getSingleImageUrl()"/>
-                                                </td>
-                                                <td>{{$category->name}}</td>
+                        <td>
+                            <x-single-image :url="$category->getSingleImageUrl()"/>
+                        </td>
+                        <td>{{$category->name}}</td>
                         <td>{{$category->tracks_count}}</td>
                         <td>{{$category->created_at}}</td>
                         <td>{{$category->updated_at}}</td>

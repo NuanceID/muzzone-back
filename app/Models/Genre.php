@@ -18,8 +18,6 @@ class Genre extends BaseModel
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
-
     public function registerMediaCollections(): void
     {
         $this

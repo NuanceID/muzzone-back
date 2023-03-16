@@ -11,7 +11,8 @@
 
             <li class="sidebar-item  {{request()->routeIs('manager.dashboard') ? 'active' : ''}}">
                 <a class="sidebar-link" href="{{route('manager.dashboard')}}">
-                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Панель управления</span>
+                    <i class="align-middle" data-feather="sliders"></i> <span
+                        class="align-middle">Панель управления</span>
                 </a>
             </li>
 
@@ -50,8 +51,12 @@
                     <i class="align-middle" data-feather="zap"></i> <span class="align-middle">Плейлисты</span>
                 </a>
             </li>
-            <li class="sidebar-item {{request()->routeIs('manager.playlists.index') ? 'active' : ''}}">
-                <a class="sidebar-link" href="{{route('manager.playlists.index')}}">
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="#"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                    <form id="logout-form" action="{{route('logout')}}" method="post">
+                        @csrf
+                    </form>
                     <i class="align-middle" data-feather="log-out"></i> <span class="align-middle">Выход</span>
                 </a>
             </li>

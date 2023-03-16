@@ -14,18 +14,11 @@
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <div class="form-group">
-                                    <label>Исполнитель</label>
-                                    <select class="form-select" name="artist_id">
-                                        @php
-                                            $thisAlbum = $album;
-                                        @endphp
-                                        @foreach($artists as $artist)
-                                            <option
-                                                @selected($thisAlbum->artist->is($artist)) value="{{ $album->id }}">{{  $album->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <x-select-search entity="artist"
+                                                 name="artist_id"
+                                                 label="Список исполнителей"
+                                                 :multiple="false"
+                                                 :options="$album->artist"/>
 
                                 <div class="form-group my-2">
                                     <label>Название</label>

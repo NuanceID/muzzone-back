@@ -13,14 +13,11 @@
                                   enctype="multipart/form-data">
                                 @csrf
 
-                                <div class="form-group my-2">
-                                    <label>Исполнитель</label>
-                                    <select class="form-select" name="artist_id">
-                                        @foreach($artists as $artist)
-                                            <option value="{{ $artist->id }}">{{  $artist->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <x-select-search entity="artist"
+                                                 name="artist_id"
+                                                 label="Список исполнителей"
+                                                 :multiple="false"
+                                />
 
                                 <div class="form-group my-2">
                                     <input type="text" class="form-control" name="name"

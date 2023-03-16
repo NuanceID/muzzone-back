@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Services\RequiredScopes\HasRequiredScopes;
+use App\Services\RequiredScopes\HasRequiredScopesInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property string $name
  */
-class Playlist extends BaseModel
+class Playlist extends BaseModel implements HasRequiredScopesInterface
 {
     use HasFactory;
-
-    protected $guarded = ['id'];
+    use HasRequiredScopes;
 
     public function registerMediaCollections(): void
     {
@@ -23,7 +27,7 @@ class Playlist extends BaseModel
             ->useDisk('playlist');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -31,5 +35,21 @@ class Playlist extends BaseModel
     public function tracks(): BelongsToMany
     {
         return $this->belongsToMany(Track::class);
+    }
+
+    public function getRequiredScopes(): array
+    {
+        if (!Auth::check()) {
+            return [
+                'onlyPublic'
+            ];
+        }
+
+        return [];
+    }
+
+    public function scopeOnlyPublic(Builder $query)
+    {
+        $query->doesntHave('user');
     }
 }

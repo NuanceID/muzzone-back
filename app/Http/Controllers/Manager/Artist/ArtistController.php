@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Artist\AddArtistRequest;
 use App\Http\Requests\Artist\UpdateArtistRequest;
 use App\Models\Artist;
-use App\Models\Track;
 use App\Services\Artist\ArtistService;
 
 class ArtistController extends Controller
@@ -36,11 +35,6 @@ class ArtistController extends Controller
         return redirect()
             ->route('manager.artists.index')
             ->with(['message' => "Исполнитель $artist->name успешно добавлен"]);
-    }
-
-    public function show(Track $track)
-    {
-        //
     }
 
     public function edit(Artist $artist)

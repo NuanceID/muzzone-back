@@ -21,7 +21,7 @@ final class GenreService
     {
         return $this
             ->model
-            ->filter()
+            ->filter(request()->query())
             ->withCount('tracks')
             ->paginate();
     }

@@ -1,22 +1,82 @@
-<select class="form-control" id="select-playlist" hidden>
-        <option value="te_1" data-search="arsenal">Arsenal</option>
-        <option value="te_2" data-search="aston villa">Aston Villa</option>
-        <option value="te_3" data-search="Brentford">Brentford</option>
-        <option value="te_4" data-search="Brighton">Brighton</option>
-        <option value="te_5" data-search="Burnley">Burnley</option>
-        <option value="te_6" data-search="Chelsea">Chelsea</option>
-        <option value="te_7" data-search="Crystal Palace">Crystal Palace</option>
-        <option value="te_8" data-search="Everton">Everton</option>
-        <option value="te_10" data-search="Leeds">Leeds</option>
-        <option value="te_9" data-search="Leicester">Leicester</option>
-        <option value="te_11" data-search="Liverpool">Liverpool</option>
-        <option value="te_12" data-search="Manchester City">Man City</option>
-        <option value="te_13" data-search="Manchester Utd">Man Utd</option>
-        <option value="te_14" data-search="Newcastle">Newcastle</option>
-        <option value="te_15" data-search="Norwich">Norwich</option>
-        <option value="te_16" data-search="Southampton">Southampton</option>
-        <option value="te_17" data-search="Tottenham Hotspur spurs">Spurs</option>
-        <option value="te_18" data-search="Watford">Watford</option>
-        <option value="te_19" data-search="West Ham">West Ham</option>
-        <option value="te_20" data-search="Wolves">Wolves</option>
-</select>
+<div
+    id="{{$entity}}"
+    x-data="{searchTerm: '' }"
+    x-init="$store.{{$entity}}.fillOptionsIfExists()">
+    <div class="form-group">
+
+        <label for="select-{{$entity}}" class="form-label">{{$label}}</label>
+
+        <input id="select-{{$entity}}"
+               type="text"
+               class="form-control w-100"
+               placeholder="Начните вводить название"
+               x-model="searchTerm"
+               x-on:keydown.debounce.200ms="$store.{{$entity}}.search(searchTerm)"/>
+
+        <ul class="list-group mt-2 shadow-sm" x-show="$store.{{$entity}}.options.length > 0">
+            <template x-for="option in $store.{{$entity}}.options">
+                <li class="list-group-item my-1" style="cursor: pointer"
+                    x-text="option.name"
+                    x-on:click="$store.{{$entity}}.selectItem(option.id, option.name); searchTerm = ''; $store.{{$entity}}.options = []"/>
+            </template>
+        </ul>
+    </div>
+
+    <div class="form-group mt-2" x-transition:enter.delay.1000ms>
+        <template x-for="option in $store.{{$entity}}.selectedOptions">
+            <div class="form-check">
+                <input
+                    name="{{$name}}"
+                    type="checkbox"
+                    :value="option.id"
+                    :id="'option-'+ {{$entity}} + '_' + option.id"
+                    checked
+                    class="form-check-input"/>
+                <label class="form-check-label" :for="'option-' + option.id" x-text="option.name"></label>
+            </div>
+        </template>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            const entity = @json($entity);
+            const multiple = @json($multiple);
+            const options = @json($options);
+
+            Alpine.store('{{$entity}}', {
+                options: [],
+                selectedOptions: [],
+                selectedIds: [],
+                search(search) {
+                    axios.get('/manager/dictionary/' + entity + '/' + search)
+                        .then(response => {
+                            this.options = response.data;
+                        }).catch();
+                },
+                selectItem(id, name) {
+                    if (!this.selectedIds.includes(id)) {
+                        if (multiple) {
+                            this.selectedIds.push(id)
+                            this.selectedOptions.push({id: id, name: name})
+                            console.log(this.selectedOptions);
+                        } else {
+                            this.selectedOptions = []
+                            this.selectedOptions.push({id: id, name: name})
+                        }
+                    }
+                },
+                fillOptionsIfExists() {
+                    if (options !== null) {
+                        if (options.id === undefined) {
+                            options.map(option => {
+                                this.selectedOptions.push({id: option.id, name: option.name})
+                            })
+                        } else {
+                            this.selectedOptions.push({id: options.id, name: options.name})
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</div>

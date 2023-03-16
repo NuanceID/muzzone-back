@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
+declare(strict_types=1);
+
+use App\Http\Controllers\Api\V1\Album\AlbumController;
+use App\Http\Controllers\Api\V1\Artist\ArtistController;
+use App\Http\Controllers\Api\V1\Category\CategoryController;
+use App\Http\Controllers\Api\V1\Genre\GenreController;
+use App\Http\Controllers\Api\V1\Playlist\PlaylistController;
+use App\Http\Controllers\Api\V1\Track\TrackController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::name('api.')->group(static function () {
+    Route::apiResource('albums', AlbumController::class)->only(['index', 'show']);
+    Route::apiResource('artists', ArtistController::class)->only(['index', 'show']);
+    Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
+    Route::apiResource('genres', GenreController::class)->only(['index', 'show']);
+    Route::apiResource('playlists', PlaylistController::class)->only(['index', 'show']);
+    Route::apiResource('tracks', TrackController::class)->only(['index', 'show']);
 });

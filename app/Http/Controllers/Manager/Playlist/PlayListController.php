@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Playlist\AddPlaylistRequest;
 use App\Http\Requests\Playlist\UpdatePlaylistRequest;
 use App\Models\Playlist;
-use App\Models\Track;
 use App\Services\Playlist\PlaylistService;
 
 class PlayListController extends Controller
@@ -24,9 +23,7 @@ class PlayListController extends Controller
 
     public function create()
     {
-        return view('manager.pages.playlist.create', [
-            'tracks' => Track::get(['id', 'name'])
-        ]);
+        return view('manager.pages.playlist.create');
     }
 
     public function store(AddPlaylistRequest $request)
@@ -37,14 +34,13 @@ class PlayListController extends Controller
 
         return redirect()
             ->route('manager.playlists.index')
-            ->with(['message' => "Плейлист $playlist->name успешно добавлена"]);
+            ->with(['message' => "Плейлист $playlist->name успешно добавлен"]);
     }
 
     public function edit(Playlist $playlist)
     {
         return view('manager.pages.playlist.edit', [
-            'playlist' => $playlist,
-            'tracks' => Track::get(['id', 'name'])
+            'playlist' => tap($playlist)->with('tracks:id,name')
         ]);
     }
 

@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware('auth')->prefix('manager')->name('manager.')->group(function () {
-    Route::get('/', [DashboardController::class, 'main'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'main'])->middleware('auth');
 
+Route::middleware('auth')->prefix('manager')->name('manager.')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'main'])->name('dashboard');
     Route::resource('albums', AlbumController::class);
     Route::resource('artists', ArtistController::class);
     Route::resource('categories', CategoryController::class);
@@ -24,6 +25,6 @@ Route::middleware('auth')->prefix('manager')->name('manager.')->group(function (
     Route::resource('playlists', PlayListController::class);
     Route::resource('tracks', TrackController::class);
 
-    Route::get('dictionary/{dictionary}/{search}', [DictionaryController::class, 'search'])
+    Route::get('dictionary/{dictionary}/{search?}', [DictionaryController::class, 'search'])
         ->name('dictionary.search');
 });

@@ -10,7 +10,8 @@
                         </div>
                         <img class="card-img" src="{{$playlist->getSingleImageUrl()}}" alt=".">
                         <div class="card-body">
-                            <form action="{{ route('manager.playlists.update', ['playlist' => $playlist->id]) }}" method="POST"
+                            <form action="{{ route('manager.playlists.update', ['playlist' => $playlist->id]) }}"
+                                  method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -32,14 +33,12 @@
                                     <input type="file" name="cover" class="form-control">
                                 </div>
 
-                                <div class="form-group my-2">
-                                    <label>Треки</label>
-                                    <select name="tracks_ids[]" class="form-control" multiple>
-                                        @foreach($tracks as $track)
-                                            <option @selected(in_array($track->id, $playlist->tracks()->pluck('id')->toArray())) value="{{$track->id}}">{{$track->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <x-select-search entity="track"
+                                                 name="tracks_ids[]"
+                                                 :multiple="true"
+                                                 :options="$playlist->tracks"
+                                                 label="Треки"/>
+
 
                                 <div class="form-group my-2">
                                     <button type="submit" class="btn btn-primary">Обновить</button>

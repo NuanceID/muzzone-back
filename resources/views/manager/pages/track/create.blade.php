@@ -33,41 +33,25 @@
                             <input class="form-select" type="file" name="file">
                         </div>
 
-                        <div class="form-group my-2">
-                            <label>Исполнители</label>
-                            <select class="form-select" name="artists_ids[]" multiple>
-                                @foreach($artists as $artist)
-                                    <option value="{{$artist->id}}">{{$artist->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="artist"
+                                         name="artists_ids[]"
+                                         :multiple="true"
+                                         label="Исполнители"/>
 
-                        <div class="form-group my-2">
-                            <label>Жанры</label>
-                            <select class="form-select" name="genres_ids[]" multiple>
-                                @foreach($genres as $genre)
-                                    <option value="{{$genre->id}}">{{$genre->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="genre"
+                                         name="genres_ids[]"
+                                         :multiple="true"
+                                         label="Жанры"/>
 
-                        <div class="form-group my-2">
-                            <label>Категории</label>
-                            <select class="form-select" name="categories_ids[]" multiple>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="category"
+                                         name="categories_ids[]"
+                                         :multiple="true"
+                                         label="Категории"/>
 
-                        <div class="form-group my-2">
-                            <label>Альбом</label>
-                            <select class="form-select" name="album_id">
-                                @foreach($albums as $album)
-                                    <option value="{{$album->id}}">{{$album->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <x-select-search entity="album"
+                                         name="album_id"
+                                         :multiple="false"
+                                         label="Альбом"/>
 
                         <div class="form-group my-2">
                             <button type="submit" class="btn btn-primary">Добавить</button>
