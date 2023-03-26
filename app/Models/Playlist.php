@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * @property string $name
+ * @property-read User $user_id
  */
 class Playlist extends BaseModel implements HasRequiredScopesInterface
 {
@@ -51,5 +52,10 @@ class Playlist extends BaseModel implements HasRequiredScopesInterface
     public function scopeOnlyPublic(Builder $query)
     {
         $query->doesntHave('user');
+    }
+
+    public function scopeMyPlaylists(Builder $query)
+    {
+        $query->where('user_id', Auth::user()->id);
     }
 }
