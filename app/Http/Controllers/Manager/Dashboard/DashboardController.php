@@ -9,6 +9,7 @@ use App\Models\Artist;
 use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Playlist;
+use App\Models\Track;
 
 class DashboardController
 {
@@ -20,8 +21,8 @@ class DashboardController
     public function calculateStats()
     {
         return [
-            'tracksAll' => Playlist::count(),
-            'tracksToday' => Playlist::whereCreatedAt(now())->count(),
+            'tracksAll' => Track::count(),
+            'tracksToday' => Track::whereCreatedAt(now())->count(),
             'artistsAll' => Artist::count(),
             'artistsToday' => Artist::whereCreatedAt(now())->count(),
             'albumsAll' => Album::count(),
@@ -29,7 +30,9 @@ class DashboardController
             'genresAll' => Genre::count(),
             'genresToday' => Genre::whereCreatedAt(now())->count(),
             'categoriesAll' => Category::count(),
-            'categoriesToday' => Category::whereCreatedAt(now())->count()
+            'categoriesToday' => Category::whereCreatedAt(now())->count(),
+            'playlistsAll' => Playlist::count(),
+            'playlistsToday' => Playlist::whereCreatedAt(now())->count(),
         ];
     }
 }

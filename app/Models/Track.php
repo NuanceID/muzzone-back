@@ -33,9 +33,9 @@ class Track extends BaseModel
             ->useDisk('track');
     }
 
-    public function getSingleMediaUrl(): string
+    public function getSingleMediaUrl(): ?string
     {
-        return $this->getFirstMedia('file')->getUrl();
+        return $this->getFirstMedia('file')?->getUrl();
     }
 
     public function artists(): BelongsToMany

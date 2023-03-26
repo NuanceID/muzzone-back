@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <h1 class="mt-1 mb-3">0</h1>
+                                        <h1 class="mt-1 mb-3">{{$playlistsAll}}</h1>
                                         <div class="mb-0">
                                             <span class="text-muted">Всего в базе</span>
                                         </div>
