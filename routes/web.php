@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::get('/', [DashboardController::class, 'main'])->middleware('auth');
 
-Route::middleware('auth')->prefix('manager')->name('manager.')->group(function () {
+Route::middleware(['auth', 'check.role'])->prefix('manager')->name('manager.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'main'])->name('dashboard');
     Route::resource('albums', AlbumController::class);
     Route::resource('artists', ArtistController::class);

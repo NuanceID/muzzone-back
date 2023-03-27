@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('album_id')->constrained();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->integer('bitrate');
             $table->softDeletes();
             $table->timestamps();

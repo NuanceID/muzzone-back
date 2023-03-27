@@ -28,7 +28,8 @@ class AddManagerCommand extends Command
             'name' => $this->argument('name'),
             'email' => $email = $this->argument('email'),
             'password' => Hash::make($password = (string)$this->argument('password')),
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'role' => 'manager',
         ]);
 
         $this->info("Менеджер добавлен, Логин: $email, Пароль: $password");

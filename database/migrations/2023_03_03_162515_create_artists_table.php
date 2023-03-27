@@ -11,7 +11,7 @@ return new class extends Migration {
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
