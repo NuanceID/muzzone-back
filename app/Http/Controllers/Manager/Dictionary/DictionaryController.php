@@ -13,7 +13,9 @@ class DictionaryController extends Controller
             return response()->json();
         }
 
-        $dictionary = app("App\\Models\\$dictionary");
+        $model = ucfirst($dictionary);
+
+        $dictionary = app("App\\Models\\$model");
 
         $data = $dictionary::query()
             ->where('name', 'LIKE', '%' . $search . '%')
