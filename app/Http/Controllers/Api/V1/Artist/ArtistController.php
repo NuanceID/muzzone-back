@@ -17,7 +17,7 @@ class ArtistController
 
     public function index()
     {
-        $artists =  $this->artistService->list();
+        $artists = $this->artistService->list();
 
         return IndexArtistResource::collection($artists);
     }

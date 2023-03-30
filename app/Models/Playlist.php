@@ -46,6 +46,12 @@ class Playlist extends BaseModel implements HasRequiredScopesInterface
             ];
         }
 
+        if (Auth::hasUser() && Auth::user()->role === 'user') {
+            return [
+                'myPlaylists'
+            ];
+        }
+
         return [];
     }
 
@@ -56,6 +62,6 @@ class Playlist extends BaseModel implements HasRequiredScopesInterface
 
     public function scopeMyPlaylists(Builder $query)
     {
-        $query->where('user_id', Auth::user()->id);
+        $query->where('playlists.user_id', Auth::user()->id);
     }
 }

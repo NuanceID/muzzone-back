@@ -17,7 +17,7 @@ class CategoryController
 
     public function index()
     {
-        $categories =  $this->categoryService->list();
+        $categories = $this->categoryService->list();
 
         return IndexCategoryResource::collection($categories);
     }

@@ -17,7 +17,7 @@ class GenreController
 
     public function index()
     {
-        $genres =  $this->genreService->list();
+        $genres = $this->genreService->list();
 
         return IndexGenreResource::collection($genres);
     }
