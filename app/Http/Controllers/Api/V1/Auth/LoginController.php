@@ -11,17 +11,14 @@ class LoginController
 {
     public function login(Request $request)
     {
-        $user = User::query()
-            ->firstWhere('phone', $request->get('phone'));
+        $user = User::firstWhere('phone', $request->get('phone'));
 
         if (!$user) {
             $user = $this->registerUser($request->get('phone'));
         }
 
-        $authCode = config('sms.enabled') ? mt_rand(000000, 999999) : 0000;
-
         $user->update([
-            'auth_code' => $authCode
+            'auth_code' => $this->generateAuthCode()
         ]);
 
         return response()->json([
@@ -34,7 +31,6 @@ class LoginController
         $user = User::firstWhere('phone', $request->get('phone'));
 
         if ($user->auth_code === $request->get('auth_code')) {
-
             $user->tokens()->delete();
 
             $token = $user
@@ -58,5 +54,10 @@ class LoginController
             'email' => 'Default@default.ru',
             'phone' => $phone
         ]);
+    }
+
+    private function generateAuthCode(): int
+    {
+        return config('sms.enabled') ? mt_rand(000000, 999999) : 0000;
     }
 }
