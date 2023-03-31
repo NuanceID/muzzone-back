@@ -18,7 +18,7 @@ class LoginController
             $user = $this->registerUser($request->get('phone'));
         }
 
-        $authCode = mt_rand(000000, 999999);
+        $authCode = config('sms.enabled') ? mt_rand(000000, 999999) : 0000;
 
         $user->update([
             'auth_code' => $authCode
@@ -34,6 +34,9 @@ class LoginController
         $user = User::firstWhere('phone', $request->get('phone'));
 
         if ($user->auth_code === $request->get('auth_code')) {
+
+            $user->tokens()->delete();
+
             $token = $user
                 ->createToken('auth')
                 ->plainTextToken;
