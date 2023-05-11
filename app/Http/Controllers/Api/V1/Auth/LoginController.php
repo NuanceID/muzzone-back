@@ -30,6 +30,12 @@ class LoginController
     {
         $user = User::firstWhere('phone', $request->get('phone'));
 
+        if (!$user) {
+            return response()->json([
+                'message' => 'Пользователь с таким номером телефоном не найден'
+            ]);
+        }
+
         if ($user->auth_code === $request->get('auth_code')) {
             $user->tokens()->delete();
 
@@ -43,7 +49,7 @@ class LoginController
         }
 
         return response()->json([
-            'message' => 'Пользователь с таким номером телефоном не найден'
+            'message' => 'Неправильный код подтверждения'
         ]);
     }
 
