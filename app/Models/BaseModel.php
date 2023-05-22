@@ -21,6 +21,9 @@ class BaseModel extends Model implements HasMedia
 
     protected $guarded = ['id'];
 
+    /* @todo: remove this after tests */
+    protected $perPage = 5;
+
     public function getSingleImageUrl(): ?string
     {
         return $this
