@@ -22,6 +22,7 @@ final class AlbumService
         return $this
             ->model
             ->filter(request()->query())
+            ->with('artist')
             ->withCount('tracks')
             ->paginate();
     }
