@@ -20,6 +20,7 @@
                 <th>Действия</th>
 
                 @foreach($albums as $album)
+                    {{dd($album)}}
                     <tr>
                         <td>{{$album->id}}</td>
                         <td>
