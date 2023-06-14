@@ -20,7 +20,6 @@
                 <th>Действия</th>
 
                 @foreach($albums as $album)
-                    {{dd($album)}}
                     <tr>
                         <td>{{$album->id}}</td>
                         <td>
@@ -28,8 +27,8 @@
                         </td>
                         <td>{{$album->name}}</td>
                         <td>
-                            <a href="{{route('manager.artists.edit', ['artist' => $album->artist?->id])}}">
-                                {{$album->artist?->name}}
+                            <a href="{{route('manager.artists.edit', ['artist' => $album->artist->id])}}">
+                                {{$album->artist->name}}
                             </a>
                         </td>
                         <td>{{$album->tracks_count}}</td>
