@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [LoginController::class, 'login']);
 Route::post('sms-check', [LoginController::class, 'checkAuthCode']);
 
-Route::name('api')->middleware(['auth:sanctum'])->group(static function () {
+Route::name('api')->middleware(['auth:sanctum', 'bindings'])->group(static function () {
     Route::apiResource('albums', AlbumController::class)->only(['index', 'show']);
     Route::apiResource('artists', ArtistController::class)->only(['index', 'show']);
     Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
