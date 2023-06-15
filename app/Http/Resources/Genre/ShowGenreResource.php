@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Genre;
 
-use App\Http\Resources\Track\ShowTrackResource;
+use App\Http\Resources\Track\TracksResource;
 
 class ShowGenreResource extends BaseGenreResource
 {

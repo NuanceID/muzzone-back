@@ -40,7 +40,7 @@ class Playlist extends BaseModel implements HasRequiredScopesInterface
 
     public function getRequiredScopes(): array
     {
-        if (!Auth::check()) {
+        if (Auth::check()) {
             return [
                 'onlyPublic'
             ];

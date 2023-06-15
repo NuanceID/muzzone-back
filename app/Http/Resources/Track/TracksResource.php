@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Genre;
+namespace App\Http\Resources\Track;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

@@ -16,7 +16,6 @@ class BasePlaylistResource extends JsonResource
             'name' => $this->resource->name,
             'description' => $this->resource->description,
             'cover' => $this->resource->getSingleImageUrl(),
-            'tracks' => IndexTrackResource::collection($this->resource->tracks)
         ];
     }
 }
