@@ -12,7 +12,7 @@ class ShowGenreResource extends BaseGenreResource
     {
         $data = parent::toArray($request);
 
-        $data['tracks'] = ShowTrackResource::collection($this->resource->tracks);
+        $data['tracks'] = TracksResource::collection($this->resource->tracks);
 
         return $data;
     }
