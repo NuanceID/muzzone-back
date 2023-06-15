@@ -34,3 +34,4 @@ class Album extends BaseModel
         return $this->hasMany(Track::class);
     }
 }
+
