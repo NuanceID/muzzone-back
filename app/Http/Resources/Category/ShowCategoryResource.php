@@ -12,5 +12,7 @@ class ShowCategoryResource extends BaseCategoryResource
         $data = parent::toArray($request);
 
         $data['tracks'] = TracksResource::collection($this->resource->tracks);
+
+        return  $data;
     }
 }
