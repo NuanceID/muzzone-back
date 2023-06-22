@@ -15,36 +15,36 @@ class TrackFilter extends ModelFilter
         ]
     ];
 
-    public function name(string $name): self
+    public function name(string $name): TrackFilter
     {
         return $this
             ->where('tracks.name', 'LIKE', '%' . $name . '%');
     }
 
-    public function description(string $description): self
+    public function description(string $description): TrackFilter
     {
         return $this
             ->where('tracks.description', 'LIKE', '%' . $description . '%');
     }
 
-    public function albumId(int $artistId): self
+    public function albumId(int $albumId): TrackFilter
     {
         return $this
-            ->where('tracks.artist_id', $artistId);
+            ->related('tracks.album_id', $albumId);
     }
 
-    public function artistsIds(array $artistsIds)
+    public function artistsIds(array $artistsIds): TrackFilter
     {
-        $this->related('artists', 'artists.id', $artistsIds);
+        return $this->related('artists', 'artists.id', $artistsIds);
     }
 
-    public function genresIds(array $genresIds)
+    public function genresIds(array $genresIds): TrackFilter
     {
-        $this->related('genres', 'genres.id', $genresIds);
+        return $this->related('genres', 'genres.id', $genresIds);
     }
 
-    public function categoriesIds(array $categoriesIds)
+    public function categoriesIds(array $categoriesIds): TrackFilter
     {
-        $this->related('categories', 'categories.id', $categoriesIds);
+        return $this->related('categories', 'categories.id', $categoriesIds);
     }
 }
