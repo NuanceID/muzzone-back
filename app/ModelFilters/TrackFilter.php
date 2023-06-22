@@ -9,6 +9,9 @@ class TrackFilter extends ModelFilter
     public $relations = [
         'artists' => [
             'artists_ids'
+        ],
+        'album' => [
+            'album_id'
         ]
     ];
 
