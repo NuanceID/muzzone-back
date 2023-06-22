@@ -30,7 +30,7 @@ class TrackFilter extends ModelFilter
     public function albumId(int $albumId): TrackFilter
     {
         return $this
-            ->related('tracks.album_id', $albumId);
+            ->where('tracks.album_id', $albumId);
     }
 
     public function artistsIds(array $artistsIds): TrackFilter
