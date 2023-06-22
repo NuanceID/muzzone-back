@@ -31,7 +31,7 @@
                                 {{$album->artist->name}}
                             </a>
                         </td>
-                        <td>{{$album->tracks_count}}</td>
+                        <td><a href="{{route('manager.tracks.index', ['album_id' => $album->id])}}">{{$album->tracks_count}}</a></td>
                         <td>{{$album->created_at}}</td>
                         <td>{{$album->updated_at}}</td>
                         <td>
